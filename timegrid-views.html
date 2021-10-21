@@ -10,6 +10,9 @@
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                hiddenDays : [0, 6],
+                slotMinTime : '14:00:00',
+                slotMaxTime : '23:00:00',
                 initialDate: '2020-09-12',
                 initialView: 'timeGridWeek',
                 nowIndicator: true,
@@ -19,22 +22,11 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 navLinks: true, // can click day/week names to navigate views
-                editable: false,
+                editable: true,
                 selectable: true,
                 selectMirror: true,
-                dragScroll: false,
-                draggable: false,
                 dayMaxEvents: false, // allow "more" link when too many events
                 events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2020-09-01',
-                    },
-                    {
-                        title: 'Long Event',
-                        start: '2020-09-07',
-                        end: '2020-09-10'
-                    },
                     {
                         groupId: 999,
                         title: 'Repeating Event',
@@ -72,19 +64,60 @@
                         start: '2020-09-12T20:00:00'
                     },
                     {
-                        title: 'Birthday Party',
-                        start: '2020-09-13T07:00:00'
+                        id: "1",
+                        groupId: 0,
+                        start: '2020-09-10T18:00:00',
+                        end : '2020-09-10T18:30:00',
                     },
                     {
                         title: 'Click for Google',
                         url: 'http://google.com/',
                         start: '2020-09-28'
+                    },
+                    {
+                        groupId: 'testGroupId',
+                        start: '2020-09-12T10:00:00',
+                        end: '2020-09-12T16:00:00',
+                        display: 'background'
+                    },
+                    {
+                        daysOfWeek: [ '0', '6' ], // these recurrent events move separately
+                        startTime: '00:00:00',
+                        endTime: '24:00:00',
+                        display: 'background'
+                    },
+                    {
+                        daysOfWeek: [ '1', '2', '3', '4', '5' ], // these recurrent events move separately
+                        startTime: '00:00:00',
+                        endTime: '14:00:00',
+                        display: 'background'
                     }
-                ]
-            });
+                ],
+                eventClick: function(info) {
+                    // alert('Event: ' + info.event.title);
+                    // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                    // alert('View: ' + info.view.type);
 
+                    // console.log(info);
+
+                    // change the border color just for fun
+                    info.el.style.borderColor = 'red';
+                },
+                select: function (info) {
+                    // console.log(info.start);
+                    // console.log(info.end);
+                },
+                eventOverlap: function(stillEvent, movingEvent) {
+                    return stillEvent.allDay && movingEvent.allDay;
+                },
+                selectOverlap: function(event) {
+                    return false;
+                },
+
+            });
             calendar.render();
         });
+
 
     </script>
     <style>
@@ -108,4 +141,10 @@
 <div id='calendar'></div>
 
 </body>
+
+<script>
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </html>
