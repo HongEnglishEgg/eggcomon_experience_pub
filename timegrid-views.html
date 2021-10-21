@@ -3,121 +3,200 @@
 <head>
     <meta charset='utf-8'/>
     <link href='./lib/main.css' rel='stylesheet'/>
+    <link href='./css/bootstrap.css' rel='stylesheet'/>
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
     <script src='./lib/main.js'></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
-
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                hiddenDays : [0, 6],
+                locale: 'ko',
+                themeSystem: 'bootstrap',
+                hiddenDays: [0, 6],
+                contentHeight: 'auto',
                 allDaySlot: false,
-                slotMinTime : '14:00:00',
-                slotMaxTime : '23:00:00',
-                initialDate: '2020-09-12',
+                slotMinTime: '14:00:00',
+                slotMaxTime: '20:00:00',
                 initialView: 'timeGridWeek',
                 nowIndicator: true,
                 headerToolbar: {
-                    left: 'prev,next today',
+                    left: 'prev',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'next',
+                    // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
+                titleFormat: {year: 'numeric', month: 'long', day: 'numeric'},
                 navLinks: true, // can click day/week names to navigate views
-                editable: true,
+                editable: false,
                 selectable: true,
                 selectMirror: true,
                 dayMaxEvents: false, // allow "more" link when too many events
-                events: [
-                    {
-                        groupId: 999,
-                        title: 'Repeating Event',
-                        start: '2020-09-09T16:00:00'
-                    },
-                    {
-                        groupId: 999,
-                        title: 'Repeating Event',
-                        start: '2020-09-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2020-09-11',
-                        end: '2020-09-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2020-09-12T10:30:00',
-                        end: '2020-09-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2020-09-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2020-09-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2020-09-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2020-09-12T20:00:00'
-                    },
-                    {
-                        id: "1",
-                        groupId: 0,
-                        start: '2020-09-10T18:00:00',
-                        end : '2020-09-10T18:30:00',
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2020-09-28'
-                    },
-                    {
-                        groupId: 'testGroupId',
-                        start: '2020-09-12T10:00:00',
-                        end: '2020-09-12T16:00:00',
-                        display: 'background'
-                    },
-                    {
-                        daysOfWeek: [ '0', '6' ], // these recurrent events move separately
-                        startTime: '00:00:00',
-                        endTime: '24:00:00',
-                        display: 'background'
-                    },
-                    {
-                        daysOfWeek: [ '1', '2', '3', '4', '5' ], // these recurrent events move separately
-                        startTime: '00:00:00',
-                        endTime: '14:00:00',
-                        display: 'background'
-                    }
-                ],
-                eventClick: function(info) {
+                bootstrapFontAwesome: {
+                    close: 'fa-times',
+                    prev: 'fa-chevron-left',
+                    next: 'fa-chevron-right',
+                    prevYear: 'fa-angle-double-left',
+                    nextYear: 'fa-angle-double-right'
+                },
+                eventSources: {
+                    events: [
+                        // {
+                        //     groupId: 999,
+                        //     title: 'Repeating Event',
+                        //     start: '2020-09-09T16:00:00'
+                        // },
+                        // {
+                        //     groupId: 999,
+                        //     title: 'Repeating Event',
+                        //     start: '2020-09-16T16:00:00'
+                        // },
+                        // {
+                        //     title: 'Conference',
+                        //     start: '2020-09-11',
+                        //     end: '2020-09-13'
+                        // },
+
+                        {
+                            id: "1",
+                            groupId: 2,
+                            title: 'Step1',
+                            start: '2021-10-22T18:00:00',
+                            end: '2021-10-22T18:30:00',
+                            backgroud : '',
+                            extendedProps: {
+                                parent: '홍성민',
+                                child: '홍성민',
+                                hp: '010-9345-1648',
+                            },
+                        },
+                        {
+                            title: 'Lunch',
+                            start: '2020-09-12T12:00:00'
+                        },
+                        {
+                            title: 'Meeting',
+                            start: '2020-09-12T14:30:00'
+                        },
+                        {
+                            title: 'Happy Hour',
+                            start: '2020-09-12T17:30:00'
+                        },
+                        {
+                            title: 'Dinner',
+                            start: '2020-09-11T20:00:00'
+                        },
+                        {
+                            id: "1",
+                            groupId: 0,
+                            start: '2020-09-10T18:00:00',
+                            end: '2020-09-10T18:30:00',
+                        },
+                        {
+                            title: 'Click for Google',
+                            url: 'http://google.com/',
+                            start: '2020-09-28'
+                        },
+                        {
+                            groupId: 'testGroupId',
+                            start: '2020-09-11T10:00:00',
+                            end: '2020-09-11T16:00:00',
+                            display: 'background'
+                        },
+
+                        // {
+                        //     daysOfWeek: ['0', '6'], // these recurrent events move separately
+                        //     startTime: '00:00:00',
+                        //     endTime: '24:00:00',
+                        //     display: 'background'
+                        // },
+                        // {
+                        //     daysOfWeek: ['1', '2', '3', '4', '5'], // these recurrent events move separately
+                        //     startTime: '00:00:00',
+                        //     endTime: '14:00:00',
+                        //     display: 'background'
+                        // }
+                    ],
+                    color: '#ffc107',   // an option!
+                    textColor: '#fff' // an option!
+                },
+
+                eventClick: function (info) {
                     // alert('Event: ' + info.event.title);
                     // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
                     // alert('View: ' + info.view.type);
 
-                    // console.log(info);
-
+                    if(info.event.groupId == 0){
+                        // TODO ajax 스케줄 정보 불러오기
+                        if(true){
+                            info.event.remove();
+                        }
+                    }else{
+                        if(confirm('아이이름:'+info.event.extendedProps.child+'\n부모이름:'+info.event.extendedProps.parent+'\n전화번호:'+info.event.extendedProps.hp+'\n삭제하시겠습니까?')){
+                            // TODO ajax 스케줄 정보 불러오기
+                            info.event.remove();
+                        }
+                    }
                     // change the border color just for fun
-                    info.el.style.borderColor = 'red';
+
                 },
-                select: function (info) {
-                    // console.log(info.start);
-                    // console.log(info.end);
+                dateClick: function (data) {
+                    console.log(data);
                 },
-                eventOverlap: function(stillEvent, movingEvent) {
+                select: function (data) {
+                    var startDate = WithoutTime(data.start).getTime();
+                    var aDayLater = WithoutTime(new Date()).getTime()+86400000;
+
+                    if(startDate < aDayLater){
+                        alert('reject');
+                        calendar.unselect();
+                        return false;
+                    }
+
+                    var jsonData = {
+                        'startTime': {
+                            'year': data.start.getFullYear(),
+                            'month': data.start.getMonth() + 1,
+                            'date': data.start.getDate(),
+                            'minutes': data.start.getMinutes(),
+                        },
+                        'endTime': {
+                            'year': data.end.getFullYear(),
+                            'month': data.end.getMonth() + 1,
+                            'date': data.end.getDate(),
+                            'minutes': data.end.getMinutes(),
+                        }
+                    };
+
+                    // TODO AJAX
+                    var diff = (data.end.getTime() - data.start.getTime()) / 1000 / 60 / 30;
+                    var startDateTime = data.start;
+                    var endDateTime = new Date(startDateTime.getTime() + 1800000);
+                    for ($i = 0; $i < diff; $i++) {
+                        calendar.addEvent({
+                            groupId: 0,
+                            start: $i == 0 ? startDateTime : startDateTime = new Date(startDateTime.getTime() + 1800000),
+                            end: $i == 0 ? endDateTime : endDateTime = new Date(endDateTime.getTime() + 1800000),
+                            title: '스케줄',
+                        })
+                    }
+                    calendar.unselect();
+                },
+                eventOverlap: function (stillEvent, movingEvent) {
                     return stillEvent.allDay && movingEvent.allDay;
                 },
-                selectOverlap: function(event) {
+                selectOverlap: function (event) {
                     return false;
                 },
-
             });
             calendar.render();
         });
+
+        function WithoutTime(dateTime) {
+            var date = new Date(dateTime.getTime());
+            date.setHours(0, 0, 0, 0);
+            return date;
+        }
 
 
     </script>
@@ -135,6 +214,18 @@
             margin: 0 auto;
         }
 
+        .fc .fc-toolbar {
+            justify-content: center;
+        }
+
+        .fc .fc-toolbar .fc-toolbar-chunk {
+            margin: 0 1rem;
+        }
+
+        .fc .fc-timegrid-slot {
+            height: 2.5em;
+        }
+
     </style>
 </head>
 <body>
@@ -147,5 +238,6 @@
 
 
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
 </html>
