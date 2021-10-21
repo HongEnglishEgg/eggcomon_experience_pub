@@ -122,13 +122,9 @@
                 },
 
                 eventClick: function (info) {
-                    // alert('Event: ' + info.event.title);
-                    // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                    // alert('View: ' + info.view.type);
-
                     if(info.event.groupId == 0){
-                        // TODO ajax 스케줄 정보 불러오기
-                        if(true){
+                        if(confirm('삭제하시겠습니까?')){
+                            // TODO ajax 스케줄 정보 불러오기
                             info.event.remove();
                         }
                     }else{
